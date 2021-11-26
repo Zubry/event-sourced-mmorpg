@@ -6,7 +6,11 @@ defmodule Location do
   def move(id, {x, y}) do
     [{pid, _}] = Registry.lookup(Location.Registry, id)
 
-    {:ok, _events} = Location.Aggregator.move(pid, {x, y})
+    {:ok, events} = Location.Aggregator.move(pid, {x, y})
+
+    for event <- events do
+      EventBus.notify(event)
+    end
 
     :ok
   end
@@ -14,7 +18,11 @@ defmodule Location do
   def teleport(id, {x, y}) do
     [{pid, _}] = Registry.lookup(Location.Registry, id)
 
-    {:ok, _events} = Location.Aggregator.teleport(pid, {x, y})
+    {:ok, events} = Location.Aggregator.teleport(pid, {x, y})
+
+    for event <- events do
+      EventBus.notify(event)
+    end
 
     :ok
   end

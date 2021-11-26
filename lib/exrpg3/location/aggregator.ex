@@ -21,14 +21,18 @@ defmodule Location.Aggregator do
 
   def handle_call({:move, {dx, dy}}, _from, %__MODULE__{} = state) do
     new_state = %__MODULE__{ state | x: state.x + dx, y: state.y + dy }
-    events = [{:entity_moved, id: state.id, from: {state.x, state.y}, to: {new_state.x, new_state.y}}]
+    events = [
+      Location.Events.moved(id: state.id, from: {state.x, state.y}, to: {new_state.x, new_state.y})
+    ]
 
     {:reply, {:ok, events}, new_state}
   end
 
   def handle_call({:teleport, {x, y}}, _from, %__MODULE__{} = state) do
     new_state = %__MODULE__{ state | x: x, y: y }
-    events = [{:entity_moved, id: state.id, from: {state.x, state.y}, to: {new_state.x, new_state.y}}]
+    events = [
+      Location.Events.moved(id: state.id, from: {state.x, state.y}, to: {new_state.x, new_state.y})
+    ]
 
     {:reply, {:ok, events}, new_state}
   end
