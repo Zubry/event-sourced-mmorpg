@@ -1,3 +1,4 @@
 %{
   "event_bus": {:hex, :event_bus, "1.6.2", "75a68e2950a383bd413acadd97071c3990534afec307564c11432bc477a2f509", [:mix], [], "hexpm", "6a04ae12b5b40e2bcc71f920da43fb24ac712e13ec4f81e020f37b2a2c47b481"},
+  "gen_stage": {:hex, :gen_stage, "1.1.2", "b1656cd4ba431ed02c5656fe10cb5423820847113a07218da68eae5d6a260c23", [:mix], [], "hexpm", "9e39af23140f704e2b07a3e29d8f05fd21c2aaf4088ff43cb82be4b9e3148d02"},
 }

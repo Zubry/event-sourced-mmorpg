@@ -8,7 +8,7 @@ defmodule Location.Aggregator do
   end
 
   def init(id) do
-    {:ok, %__MODULE__{ id: id }}
+    {:ok, %__MODULE__{id: id}}
   end
 
   def move(pid, {dx, dy}) do
@@ -20,18 +20,28 @@ defmodule Location.Aggregator do
   end
 
   def handle_call({:move, {dx, dy}}, _from, %__MODULE__{} = state) do
-    new_state = %__MODULE__{ state | x: state.x + dx, y: state.y + dy }
+    new_state = %__MODULE__{state | x: state.x + dx, y: state.y + dy}
+
     events = [
-      Location.Events.moved(id: state.id, from: {state.x, state.y}, to: {new_state.x, new_state.y})
+      Location.Events.moved(
+        id: state.id,
+        from: {state.x, state.y},
+        to: {new_state.x, new_state.y}
+      )
     ]
 
     {:reply, {:ok, events}, new_state}
   end
 
   def handle_call({:teleport, {x, y}}, _from, %__MODULE__{} = state) do
-    new_state = %__MODULE__{ state | x: x, y: y }
+    new_state = %__MODULE__{state | x: x, y: y}
+
     events = [
-      Location.Events.moved(id: state.id, from: {state.x, state.y}, to: {new_state.x, new_state.y})
+      Location.Events.moved(
+        id: state.id,
+        from: {state.x, state.y},
+        to: {new_state.x, new_state.y}
+      )
     ]
 
     {:reply, {:ok, events}, new_state}

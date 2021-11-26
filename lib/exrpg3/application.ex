@@ -8,7 +8,9 @@ defmodule Exrpg3.Application do
   @impl true
   def start(_type, _args) do
     children = [
-      {Location.Supervisor, []}
+      {Location.Supervisor, []},
+      {Example.Producer, []},
+      {Example.Consumer, []}
       # Starts a worker by calling: Exrpg3.Worker.start_link(arg)
       # {Exrpg3.Worker, arg}
     ]
