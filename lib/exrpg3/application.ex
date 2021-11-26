@@ -8,6 +8,8 @@ defmodule Exrpg3.Application do
   @impl true
   def start(_type, _args) do
     children = [
+      {Registry, keys: :unique, name: Location.Registry},
+      {DynamicSupervisor, strategy: :one_for_one, name: Location.DynamicSupervisor}
       # Starts a worker by calling: Exrpg3.Worker.start_link(arg)
       # {Exrpg3.Worker, arg}
     ]
